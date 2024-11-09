@@ -6,9 +6,6 @@ namespace LibraryApp.Services
 {
     public class ReservationService : IReservationService
     {
-        public User User { get; set; }
-        public Book Book { get; set; }
-
         private List<Reservation> reservations = new List<Reservation>();
         private ReservationValidator validator = new ReservationValidator();
 
@@ -21,6 +18,11 @@ namespace LibraryApp.Services
                 return true;
             }
             return false;
+        }
+
+        public List<Reservation> GetReservations()
+        {
+            return reservations;
         }
     }
 }

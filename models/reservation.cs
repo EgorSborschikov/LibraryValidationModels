@@ -14,11 +14,31 @@ namespace LibraryApp.Models
         [Required]
         public DateTime ReservationDate { get; set; }
 
-        public Reservation(User user, Book book, DateTime reservationDate)
+        static void ReserveBook(ReservationService reservationService, UserService userService, BookService bookService)
         {
-            User = user;
-            Book = book;
-            ReservationDate = reservationDate;
+            Console.Write("Enter your username: ");
+            var username = Console.ReadLine();
+            var user = userService.GetUser (username);
+
+            if (user == null)
+            {
+                Console.WriteLine("User  not found.");
+                return;
+            }
+
+            Console.Write("Enter book title to reserve: ");
+            var title = Console.ReadLine();
+            var book = bookService.GetBook(title);
+
+            if (book == null)
+            {
+                Console.WriteLine("Book not found.");
+                return;
+            }
+
+            var reservation = new Reservation { User = user, Book = book, ReservationDate = DateTime.Now };
+            reservationService.Reserve(reservation);
+            Console.WriteLine("Book reserved successfully!");
         }
     }
 }

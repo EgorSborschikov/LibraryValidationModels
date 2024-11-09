@@ -6,9 +6,6 @@ namespace LibraryApp.Services
 {
     public class BookService : IBookService
     {
-        public string Title { get; set; }
-        public string Author { get; set; }
-        
         private List<Book> books = new List<Book>();
         private BookValidator validator = new BookValidator();
 
@@ -21,6 +18,11 @@ namespace LibraryApp.Services
                 return true;
             }
             return false;
+        }
+
+        public Book GetBook(string title)
+        {
+            return books.Find(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

@@ -13,11 +13,18 @@ namespace LibraryApp.Models
         [Range(1, 1000, ErrorMessage = "Pages must be between 1 and 1000.")]
         public int Pages { get; set; }
 
-        public Book(string title, string author, int pages)
+        static void AddBook(BookService bookService)
         {
-            Title = title;
-            Author = author;
-            Pages = pages;
+            Console.Write("Enter book title: ");
+            var title = Console.ReadLine();
+            Console.Write("Enter author: ");
+            var author = Console.ReadLine();
+            Console.Write("Enter number of pages: ");
+            var pages = int.Parse(Console.ReadLine());
+
+            var book = new Book { Title = title, Author = author, Pages = pages };
+            bookService.AddBook(book);
+            Console.WriteLine("Book added successfully!");
         }
     }
 }

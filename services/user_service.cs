@@ -6,9 +6,6 @@ namespace LibraryApp.Services
 {
     public class UserService : IUserService
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
-        
         private List<User> users = new List<User>();
         private UserValidator validator = new UserValidator();
 
@@ -21,6 +18,11 @@ namespace LibraryApp.Services
                 return true;
             }
             return false;
+        }
+
+        public User GetUser (string username)
+        {
+            return users.Find(u => u.Username == username);
         }
     }
 }
